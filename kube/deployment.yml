@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-micro-one-app
+  labels:
+    app: java-micro-one
+    service: app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: java-micro-one
+      service: app
+  template:
+    metadata:
+      labels:
+        app: java-micro-one
+        service: app
+    spec:
+      containers:
+      - name: web
+        image: 2hog/java-micro-one
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+            name: web

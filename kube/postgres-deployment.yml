@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: java-micro-one-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-micro-one
+      service: postgres
+  template:
+    metadata:
+      labels:
+        app: java-micro-one
+        service: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:12
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: my-pass
+            - name: POSTGRES_DB
+              value: mydb
